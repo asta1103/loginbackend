@@ -53,16 +53,16 @@ app.post('/login-validation', (req, res)=>{
 
 const profileDB = [];
  
-app.post('/registration', ()=>{
+app.post('/registration', (req, res)=>{
     let firstname = req.body.firstname;
     let lastname = req.body.lastname;
     let phone = req.body.phone;
     let address = req.body.address;
     let email = req.body.email;
 
-    idCoount = profileDB.length + 1;
+    idCount = profileDB.length + 1;
     const newRecord = {
-        id: idCoount,
+        id: idCount,
         firstname: firstname,
         lastname: lastname,
         phone: phone,
@@ -72,9 +72,9 @@ app.post('/registration', ()=>{
     
   const saveStatus = profileDB.push(newRecord);  
    if (saveStatus) {
-     res.status(200).json(
-        { code: "success", msg:"registration successful" }   
-     )
+    //  res.status(200).json(
+    //     { code: "success", msg:"registration successful" }  
+        res.status(200).json({code: "success", msg:"registration successful", saveStatus , profileDB });
    } else {
      res.status(401).json(
         { code: "failed", msg:"registration error in saving" }   

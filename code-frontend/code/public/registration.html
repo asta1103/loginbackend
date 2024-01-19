@@ -6,15 +6,56 @@
     <title>registration</title>
 </head>
 <body>
-    <form>
+    <form >
+        <label for="username">Firstname</label> <br />
         <input type="text" name="firstname" id="firstname" placeholder="Enter your firstname"> <br />
+        <label for="username">Lastname</label> <br />
         <input type="text" name="lastname" id="lastname" placeholder="Enter your lastname"> <br />
-        <input type="number" name="phone" id="Phone" placeholder="Enter your phone"> <br />
+        <label for="username">Phone</label> <br />
+        <input type="phone" name="phone" id="Phone" placeholder="Enter your phone"> <br />
+        <label for="username">Address</label> <br />
         <input type="text" name="address" id="address" placeholder="Enter your address"> <br />
+        <label for="username">Email</label> <br />
         <input type="email" name="email" id="email" placeholder="Enter your email"> <br />
     <br />        
     <button type="button" id="formSubmit">Registration</button>
     </form>
+
+    <script>
+        document.getElementById('formSubmit').addEventListener('click', function () {
     
+            var firstname = document.getElementById('firstname').value;
+            var lastname = document.getElementById('lastname').value;
+            var phone = document.getElementById('Phone').value;
+            var address = document.getElementById('address').value;
+            var email = document.getElementById('email').value;
+
+             var formData = {
+                firstname: firstname,
+                lastname: lastname,
+                phone: phone,
+                address: address,
+                email: email
+            };
+            
+            var url = 'http://localhost:5000/registration';
+
+
+            fetch(url, {      // Make a POST request to the backend
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response from backend:', data);  // Handle the response from the backend
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            });
+    </script>
 </body>
 </html>
